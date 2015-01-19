@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<linkk>
+<links>
+
 	<link http="http://www.youtube.com/" title="Youtube.com" length="NA"/>
 	<link http="http://www.youtube.com/watch?v=fzzjgBAaWZw" title="Ninja cat comes closer while not moving!" length="1:14"/>
 	<link http="http://www.youtube.com/watch?v=in6RZzdGki8" title="Super Mario Brothers - Frustration" length="23:40"/>
@@ -63,4 +64,5 @@
 	<link http="http://www.youtube.com/watch?v=xP1-oquwoL8" title="Nicolas Cage Losing His Shit" length="4:14"/>
 	<link http="http://www.youtube.com/watch?v=h5aSa4tmVNM" title="Charlie Sheen Says Hes Not Bipolar but Bi-Winning" length="5:33"/>
 	<link http="http://www.youtube.com/watch?v=y57sYHIDP_Y" title="Harry Potter in 99 Seconds" length="1:44"/>
-</linkk>
+
+</links>

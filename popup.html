@@ -1,70 +1,32 @@
 <style>
-body { width:550px; }
+	body { width:550px; }
 </style>
 
 <form name="sForm">
-<input type="text" name="str" id="str" onkeyup="if (event.keyCode == 13) { go(); } else { search(); }" onKeyPress="if (event.which == 13) return false;" />
-<input type="button" value="Search" id="sSubmit" onClick="search()">
+	<!-- Open tab on enter, otherwise search for characters -->
+	<input type="text" name="str" id="str" onkeyup="if (event.keyCode == 13) { go(); } else { search(); }" onKeyPress="if (event.which == 13) return false;" />
+	<input type="button" value="Search" id="sSubmit" onClick="search()">
 </form>
 
 <script>
-var req = new XMLHttpRequest(), current;
-req.open("GET", "links.xml");
-req.onload = showLinks;
-req.send(null);
+	var req = new XMLHttpRequest(), current;
+	req.open("GET", "links.xml");
+	req.onload = showLinks;
+	req.send(null);
 
-function showLinks()
-{
-	var links = req.responseXML.getElementsByTagName("link");
-	var p, a, h, t;
-	
-	current = links[0].getAttribute("http");
-	
-	for (var i = 0, link; link = links[i]; i++)
-	{
-		p = document.createElement("p");
-		a = document.createElement("a");
-		h = link.getAttribute("http");
-		t = link.getAttribute("title");
-		l = link.getAttribute("length");
-		p.appendChild(document.createTextNode((i+1) + ') '));
-		a.href = h;
-		a.onclick = (function(value) {
-			return function() { chrome.tabs.create( { url: value } ); }
-		})(h);
-		a.appendChild(document.createTextNode(t));
-		p.appendChild(a);
-		if (l != "NA") p.appendChild(document.createTextNode(" (" + l + ")"));
-		document.body.appendChild(p);
-	}
-	document.getElementById("str").focus();
-}
+	function showLinks() {
+		var links = req.responseXML.getElementsByTagName("link");
+		var p, a, h, t;
 
-function search()
-{
-	var str = document.sForm.str.value.toLowerCase()
-	var links = document.getElementsByTagName('p');
-	for (var i = (links.length-1); i >= 0; i--)
-		links[i].parentNode.removeChild(links[i]);
-	
-	links = req.responseXML.getElementsByTagName("link");
-	var p, a, h, t, k = 0, link, cFlag;
-	
-	current = null;
-	cFlag = 1;
-	
-	for (var i = 0; link = links[i]; i++)
-	{
-		t = link.getAttribute("title");
-		if (t.toLowerCase().indexOf(str) != -1)
-		{
-			k++;
-			if (cFlag == 1) { current = links[i].getAttribute("http"); cFlag = 0; }
+		current = links[0].getAttribute("http");
+
+		for (var i = 0, link; link = links[i]; i++) {
 			p = document.createElement("p");
 			a = document.createElement("a");
 			h = link.getAttribute("http");
+			t = link.getAttribute("title");
 			l = link.getAttribute("length");
-			p.appendChild(document.createTextNode((k) + ') '));
+			p.appendChild(document.createTextNode((i+1) + ') '));
 			a.href = h;
 			a.onclick = (function(value) {
 				return function() { chrome.tabs.create( { url: value } ); }
@@ -74,11 +36,44 @@ function search()
 			if (l != "NA") p.appendChild(document.createTextNode(" (" + l + ")"));
 			document.body.appendChild(p);
 		}
+		document.getElementById("str").focus();
 	}
-}
 
-function go()
-{
-	if (current != null) chrome.tabs.create( { url: current } );
-}
+	function search() {
+		var str = document.sForm.str.value.toLowerCase()
+		var links = document.getElementsByTagName('p');
+		for (var i = (links.length-1); i >= 0; i--)
+			links[i].parentNode.removeChild(links[i]);
+
+		links = req.responseXML.getElementsByTagName("link");
+		var p, a, h, t, k = 0, link, cFlag;
+
+		current = null;
+		cFlag = 1;
+
+		for (var i = 0; link = links[i]; i++) {
+			t = link.getAttribute("title");
+			if (t.toLowerCase().indexOf(str) != -1) {
+				k++;
+				if (cFlag == 1) { current = links[i].getAttribute("http"); cFlag = 0; }
+				p = document.createElement("p");
+				a = document.createElement("a");
+				h = link.getAttribute("http");
+				l = link.getAttribute("length");
+				p.appendChild(document.createTextNode((k) + ') '));
+				a.href = h;
+				a.onclick = (function(value) {
+					return function() { chrome.tabs.create( { url: value } ); }
+				})(h);
+				a.appendChild(document.createTextNode(t));
+				p.appendChild(a);
+				if (l != "NA") p.appendChild(document.createTextNode(" (" + l + ")"));
+				document.body.appendChild(p);
+			}
+		}
+	}
+
+	function go() {
+		if (current != null) chrome.tabs.create( { url: current } );
+	}
 </script>
