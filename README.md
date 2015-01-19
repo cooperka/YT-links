@@ -17,7 +17,7 @@ When you click the icon at the top of your browser window, it opens a list of al
 I thought it would be cool to have a Chrome extension, so I made one! It's basically a glorified button to access YouTube bookmarks. But you can't modify them unless you upload an updated version to the Web Store then wait for the new version to propagate. Sigh.
 
 Note:
-All the code here is in its original form, and hasn't been modified since I wrote it in 2011. My eyes bleed while reading it.
+All the code here is (mostly) in its original form, and hasn't been modified since I wrote it in 2011; my eyes bleed while reading it.
 
 ## Contributing
 
