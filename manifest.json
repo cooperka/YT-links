@@ -1,0 +1,14 @@
+{
+  "name": "YT Links",
+  "version": "1.2",
+  "description": "Displays quick, searchable links to great YouTube videos. Mostly for personal use.",
+  "icons": { "16": "icon16.png",
+             "48": "icon48.png",
+            "128": "icon128.png" },
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_title": "YT Links",
+    "popup": "popup.html"
+  },
+  "permissions": [ "tabs" ]
+}
